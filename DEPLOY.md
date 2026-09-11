@@ -18,7 +18,7 @@ existing listing. Two are already spent:
 | `crew-deskmates.vercel.app` | Crew's listing (and the old `/worklog/` page) |
 | `notchling.zopcloud.zop.dev` | Notchling's listing |
 
-So Chit ships on **`chit.zopcloud.zop.dev`**, with `chit.vercel.app` as the
+So Chit ships on **`chit.zopcloud.zop.dev`**, with `getchit.vercel.app` as the
 mirror and the analytics endpoint.
 
 ## Steps in the ZopDay console

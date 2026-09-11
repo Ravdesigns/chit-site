@@ -38,15 +38,24 @@ fi
 # itself. Nothing is committed: the swap happens in a staging copy.
 STAGE=$(mktemp -d)
 /usr/bin/rsync -a --exclude .vercel --exclude .git "$SRC/" "$STAGE/"
-/usr/bin/sed -i '' 's|chit\.zopcloud\.zop\.dev|chit.vercel.app|g' "$STAGE/index.html" "$STAGE/get.sh"
+/usr/bin/sed -i '' 's|chit\.zopcloud\.zop\.dev|getchit.vercel.app|g' "$STAGE/index.html" "$STAGE/get.sh"
 cp -R "$SRC/.vercel" "$STAGE/.vercel" 2>/dev/null || true
 
 cd "$STAGE"
 vercel --prod --yes >/dev/null 2>&1
 cd "$SRC"; rm -rf "$STAGE"
 
-B=https://chit.vercel.app
-for u in / /get.sh /Chit.zip /version.txt /assets/site.css; do
-  printf "  %s  %s\n" "$(curl -s -o /dev/null -w '%{http_code}' "$B$u")" "$u"
+B=https://getchit.vercel.app
+fail=0
+for u in / /get.sh /Chit.zip /version.txt /assets/site.css /api/hit; do
+  c=$(curl -s -o /dev/null -m 20 -w '%{http_code}' "$B$u")
+  printf "  %s  %s\n" "$c" "$u"
+  [ "$c" = "200" ] || fail=1
 done
-echo "✓ mirror live at $B"
+# This used to print success unconditionally, and did exactly that while every
+# path 404'd. A deploy script that cannot fail is not a check.
+if [ "$fail" -eq 0 ]; then
+  echo "✓ mirror live at $B"
+else
+  echo "✗ mirror NOT healthy at $B — do not rely on the counter"; exit 1
+fi

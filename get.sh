@@ -7,7 +7,7 @@ TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 # Count this install. The one-liner never loads the page, so this is the only way
 # it shows up in the tally. Capped at two seconds and allowed to fail: it cannot
 # hang the install and cannot break it.
-curl -fsS -m 2 -X POST "https://chit.vercel.app/api/hit?e=install" </dev/null >/dev/null 2>&1 || true
+curl -fsS -m 2 -X POST "https://getchit.vercel.app/api/hit?e=install" </dev/null >/dev/null 2>&1 || true
 
 echo "▸ downloading Chit…"
 curl -fsSL "https://chit.zopcloud.zop.dev/Chit.zip" -o "$TMP/Chit.zip"

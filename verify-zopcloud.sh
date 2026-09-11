@@ -2,7 +2,7 @@
 # Run this the moment the ZopCloud rebuild reports Active. It checks the things
 # that actually break a launch, not just that the page loads.
 H=https://chit.zopcloud.zop.dev
-V=https://chit.vercel.app
+V=https://getchit.vercel.app
 pass=0; fail=0
 ok(){ printf "  \033[32m✓\033[0m %s\n" "$1"; pass=$((pass+1)); }
 no(){ printf "  \033[31m✗\033[0m %s\n" "$1"; fail=$((fail+1)); }
@@ -53,6 +53,10 @@ echo "▸ analytics reachable from this host"
 # the page must call it absolutely or the counter silently records nothing.
 grep -q "$V/api/hit" <<<"$PAGE" && ok "page beacon is absolute" || no "page beacon is relative"
 grep -q "$V/api/hit" <<<"$(curl -s -m 20 "$H/get.sh")" && ok "get.sh install beacon is absolute" || no "get.sh beacon is relative"
+# An absolute URL that 404s is worse than a relative one: it looks correct and
+# records nothing. The first version of this file checked only the shape.
+AC=$(curl -s -o /dev/null -m 20 -w '%{http_code}' "$V/api/hit")
+[ "$AC" = "200" ] && ok "the counter actually answers ($V/api/hit)" || no "COUNTER IS DEAD: $V/api/hit returned $AC — every event is recorded nowhere"
 
 echo
 printf "  %d passed, %d failed\n" "$pass" "$fail"

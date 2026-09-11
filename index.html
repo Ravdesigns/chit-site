@@ -259,16 +259,16 @@
   // static files only.
   (function(){
     try{
-      fetch("https://chit.vercel.app/api/hit?e=visit&r=" + encodeURIComponent(document.referrer||""),
+      fetch("https://getchit.vercel.app/api/hit?e=visit&r=" + encodeURIComponent(document.referrer||""),
             {method:"POST",keepalive:true,mode:"no-cors"});
     }catch(e){}
     var dl=document.getElementById("dl");
     if(dl) dl.addEventListener("click",function(){
-      try{fetch("https://chit.vercel.app/api/hit?e=download",{method:"POST",keepalive:true,mode:"no-cors"});}catch(e){}
+      try{fetch("https://getchit.vercel.app/api/hit?e=download",{method:"POST",keepalive:true,mode:"no-cors"});}catch(e){}
     });
     document.querySelectorAll('[data-buy="pro"]').forEach(function(b){
       b.addEventListener("click",function(){
-        try{fetch("https://chit.vercel.app/api/hit?e=pro",{method:"POST",keepalive:true,mode:"no-cors"});}catch(e){}
+        try{fetch("https://getchit.vercel.app/api/hit?e=pro",{method:"POST",keepalive:true,mode:"no-cors"});}catch(e){}
       });
     });
   })();

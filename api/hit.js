@@ -41,7 +41,7 @@ const EVENTS = ['visit', 'download', 'install', 'pro'];
 // here makes every past tally honest too, without touching a single stored record.
 const SELF_HOSTS = new Set([
   'chit.zopcloud.zop.dev',
-  'chit.vercel.app',
+  'getchit.vercel.app',
   'localhost',
   '127.0.0.1',
 ]);
