@@ -45,13 +45,39 @@ cd "$STAGE"
 vercel --prod --yes >/dev/null 2>&1
 cd "$SRC"; rm -rf "$STAGE"
 
+# Ask the API which deployment is newest rather than scraping the deploy output,
+# which writes its URL to a stream that is not reliably captured.
+URL=$(vercel ls chit 2>/dev/null | grep -oE 'https://chit-[a-z0-9]+-team-11199\.vercel\.app' | head -1)
+
+# Re-point the stable alias at THIS deployment.
+#
+# `vercel alias set` pins a name to one specific deployment, and `vercel --prod`
+# does not move it: it only updates the auto-generated aliases. Without this the
+# name silently freezes on whatever build it was first pointed at, which is
+# exactly what happened — getchit.vercel.app kept serving a pre-redesign page
+# for hours while every other host had the current one.
+if [ -n "$URL" ]; then
+  vercel alias set "$URL" getchit.vercel.app >/dev/null 2>&1 \
+    && echo "  alias getchit.vercel.app -> $URL" \
+    || echo "  ! could not move the alias; getchit.vercel.app may be stale"
+fi
+
+# The mirror exists for /api/hit only. Everything else redirects to the
+# canonical ZopCloud host, so there is exactly one page on the internet and no
+# duplicate to land on by accident.
 B=https://getchit.vercel.app
 fail=0
-for u in / /get.sh /Chit.zip /version.txt /assets/site.css /api/hit; do
+c=$(curl -s -o /dev/null -m 20 -w '%{http_code}' "$B/api/hit")
+printf "  %s  %s\n" "$c" "/api/hit (must be 200)"
+[ "$c" = "200" ] || fail=1
+for u in / /get.sh /assets/site.css; do
   c=$(curl -s -o /dev/null -m 20 -w '%{http_code}' "$B$u")
-  printf "  %s  %s\n" "$c" "$u"
-  [ "$c" = "200" ] || fail=1
+  printf "  %s  %s\n" "$c" "$u (must redirect)"
+  case "$c" in 30*) ;; *) fail=1 ;; esac
 done
+L=$(curl -s -o /dev/null -m 20 -D - "$B/" | awk 'tolower($1)=="location:"{print $2}' | tr -d "\r")
+printf "  ->   %s\n" "${L:-no Location header}"
+case "$L" in https://chit.zopcloud.zop.dev*) ;; *) fail=1 ;; esac
 # This used to print success unconditionally, and did exactly that while every
 # path 404'd. A deploy script that cannot fail is not a check.
 if [ "$fail" -eq 0 ]; then
