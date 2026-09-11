@@ -111,12 +111,12 @@ export default async function handler(req, res) {
         return res.status(200).json({ ok: true, ...(await tally(since)) });
     }
 
-    // Key-guarded reset. Only usable if NL_ADMIN_KEY is set by hand in the Vercel
+    // Key-guarded reset. Only usable if CHIT_ADMIN_KEY is set by hand in the Vercel
     // dashboard — the CLI would not store a value for it. Without that, this always
     // 403s, which is the safe default. COUNT_FROM above is what actually hides the
     // pre-launch test events.
     if (req.query.reset) {
-      const key = process.env.NL_ADMIN_KEY || '';
+      const key = process.env.CHIT_ADMIN_KEY || '';
       if (!key || req.query.reset !== key) return res.status(403).json({ ok: false });
       let cursor, n = 0;
       do {
