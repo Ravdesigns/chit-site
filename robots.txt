@@ -1,0 +1,7 @@
+# The launch dashboard is not secret, but it should not be a search result either.
+User-agent: *
+Disallow: /stats.html
+Disallow: /api/
+Allow: /
+
+Sitemap: https://chit.zopcloud.zop.dev/

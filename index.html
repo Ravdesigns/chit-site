@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chit: your Claude Code day, printed as a receipt</title>
+<meta name="description" content="Chit reads your local Claude Code history and prints the day back as a receipt, grouped by project and ready to paste. A 385 KB Mac app. No Hammerspoon, no Python, no network.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='25' font-size='26'>🧾</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chit: your Claude Code day, printed as a receipt">
+<meta property="og:description" content="You did plenty today. By 6pm you cannot remember any of it.">
+<meta property="og:image" content="https://chit.zopcloud.zop.dev/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chit.zopcloud.zop.dev/share.png">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-product="Chit Pro" data-price="$12 once" data-mail="sisodia.ravindra10@gmail.com" data-checkout="">
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="/"><svg width="22" height="22" viewBox="0 0 76 106" fill="none" aria-hidden="true"><path d="M10.0 16 Q13.25 8 16.50 16 Q19.75 8 23.00 16 Q26.25 8 29.50 16 Q32.75 8 36.00 16 Q39.25 8 42.50 16 Q45.75 8 49.00 16 Q52.25 8 55.50 16 Q58.75 8 62.00 16 Q64.00 8 66.00 16 L66.0 86.0 Q52 97.0 38 95.0 Q24 93.0 10.0 89.0 Z" fill="currentColor"/><circle cx="28.0" cy="44" r="7.2" fill="var(--paper)"/><circle cx="48.0" cy="44" r="7.2" fill="var(--paper)"/><path d="M33 58 Q38 64 43 58" stroke="var(--paper)" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>CHIT</a>
+    <span class="sp"></span>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#pricing">Pricing</a>
+      <a class="btn sm buy" data-buy="free" href="#get">Get Chit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ── hero ─────────────────────────────────────────────────────────── -->
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <h1>You did plenty today.</h1>
+      <p class="lede">By 6pm you cannot remember any of it. Chit reads your local Claude Code
+        history and prints the day back as a receipt, grouped by project, ready to paste
+        into a standup.</p>
+      <div class="cta">
+        <a class="btn buy" data-buy="free" href="#get">Download for Mac</a>
+        <a class="btn ghost" href="#how">See what it prints</a>
+      </div>
+      <p class="meta">macOS 13+ · Apple Silicon and Intel · <span id="herosize">385 KB</span> · no account</p>
+    </div>
+    <div class="shot reveal">
+      <img src="assets/receipt.png" alt="The Chit receipt panel showing a day of work grouped by project" width="380">
+    </div>
+  </div>
+</div>
+
+<!-- ── the objection, killed early ──────────────────────────────────── -->
+<section id="how">
+  <div class="wrap">
+    <div class="facts reveal">
+      <div class="fact"><b id="factsize">385 KB</b><span>the whole app</span></div>
+      <div class="fact"><b>0</b><span>network calls, ever</span></div>
+      <div class="fact"><b>0</b><span>things to install first</span></div>
+      <div class="fact"><b>1</b><span>double click</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── what it prints ───────────────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <h2>It prints what you did, not what you typed.</h2>
+      <p class="lede">Every line is a piece of work. Claude Code names most of your sessions
+        itself, and where it has not, Chit names the line after the files you touched. Your
+        prompts never appear.</p>
+    </div>
+    <div class="two">
+      <pre class="paste"><span class="d">Wed, Sep 9 2026</span>
+
+<span class="p">rav</span>
+  • Find and push email template to GitHub ticket
+  • flywl-brief.html, leverage-clock.html, reorder.py +1
+  • Create Mac widget for Claude code usage
+
+<span class="p">cloud-audit-landing-page</span>
+  • PRODUCT.md, audit.js, index.html +3
+
+<span class="p">marketing-website-git</span>
+  • Pull marketing-platform repository</pre>
+      <div>
+        <h3>That is the clipboard, not a screenshot.</h3>
+        <p class="small" style="margin-top:10px">One click copies the whole day. Another copies a
+          single project. Paste it into a standup, a task sheet, a Jira comment or a timesheet
+          and it is already formatted. There is a Markdown version for the places that render it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── privacy leads ────────────────────────────────────────────────── -->
+<section id="privacy">
+  <div class="wrap">
+    <div class="head">
+      <h2>It reads your Claude Code transcripts.</h2>
+      <p class="lede">That sentence should give you pause, so here is the rest of it. Chit opens
+        the JSONL files Claude Code already writes to <code>~/.claude/projects</code> on your own
+        disk. Nothing leaves the machine. There is no account, no API key, no telemetry, and no
+        network code in the binary at all.</p>
+    </div>
+    <div class="rows reveal">
+      <div class="row"><h3>Never your prompts</h3><p>Lines come from the titles Claude Code
+        generates, or from the names of files you changed. What you typed is used only to decide
+        whether a session counted as work, and is never stored or shown.</p></div>
+      <div class="row"><h3>File names, not paths</h3><p>A line says <code>audit.js</code>, never
+        <code>/Users/you/clients/…</code>. A path says who you are and who you work for.</p></div>
+      <div class="row"><h3>Hide whole projects</h3><p>Keep client, NDA or job-hunt work off the
+        receipt entirely. It hides that project's lines; it cannot hide a sentence you typed about
+        that work inside a different project, and it is not sold as if it could.</p></div>
+      <div class="row"><h3>Read only</h3><p>Chit never writes to <code>~/.claude</code>. Nothing
+        it does can affect a session.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── the creature ─────────────────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <div class="head"><h2>The receipt is the app.</h2>
+      <p class="lede">It sits on your desktop and prints itself once a day. How long it is
+        depends on how much you did.</p></div>
+    <div class="cast reveal">
+      <figure><svg width="84" height="91" viewBox="0 0 76 83" fill="none" aria-hidden="true"><g transform="rotate(-2.5 38 56)"><path d="M10.0 16 Q13.25 8 16.50 16 Q19.75 8 23.00 16 Q26.25 8 29.50 16 Q32.75 8 36.00 16 Q39.25 8 42.50 16 Q45.75 8 49.00 16 Q52.25 8 55.50 16 Q58.75 8 62.00 16 Q64.00 8 66.00 16 L66.0 62.6 Q52 73.6 38 71.6 Q24 69.6 10.0 65.6 Z" fill="var(--card)" stroke="var(--ink)" stroke-width="3.6" stroke-linejoin="round"/><path d="M22.5 45.0 Q28.0 38.0 33.5 45.0" stroke="var(--ink)" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M42.5 45.0 Q48.0 38.0 53.5 45.0" stroke="var(--ink)" stroke-width="2.8" fill="none" stroke-linecap="round"/><ellipse cx="38" cy="60" rx="3" ry="2" fill="var(--ink)"/></g></svg><figcaption>a quiet morning</figcaption></figure>
+      <figure><svg width="84" height="117" viewBox="0 0 76 106" fill="none" aria-hidden="true"><g transform="rotate(-2.5 38 56)"><path d="M10.0 16 Q13.25 8 16.50 16 Q19.75 8 23.00 16 Q26.25 8 29.50 16 Q32.75 8 36.00 16 Q39.25 8 42.50 16 Q45.75 8 49.00 16 Q52.25 8 55.50 16 Q58.75 8 62.00 16 Q64.00 8 66.00 16 L66.0 86.0 Q52 97.0 38 95.0 Q24 93.0 10.0 89.0 Z" fill="var(--card)" stroke="var(--ink)" stroke-width="3.6" stroke-linejoin="round"/><ellipse cx="17" cy="51" rx="4.4" ry="2.7" fill="var(--accent)" opacity=".30"/><ellipse cx="59" cy="51" rx="4.4" ry="2.7" fill="var(--accent)" opacity=".30"/><circle cx="28.0" cy="44.0" r="7.2" fill="var(--ink)"/><circle cx="25.4" cy="40.4" r="2.4" fill="var(--card)"/><circle cx="30.8" cy="47.0" r="1" fill="var(--card)" opacity=".55"/><circle cx="48.0" cy="44.0" r="7.2" fill="var(--ink)"/><circle cx="45.4" cy="40.4" r="2.4" fill="var(--card)"/><circle cx="50.8" cy="47.0" r="1" fill="var(--card)" opacity=".55"/><path d="M33 58 Q38 64 43 58" stroke="var(--ink)" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M22 76 H54" stroke="var(--faint)" stroke-width="2.4" stroke-linecap="round"/><rect x="22" y="83" width="16" height="3.4" rx="1.7" fill="var(--accent)"/></g></svg><figcaption>a full day</figcaption></figure>
+      <figure><svg width="84" height="111" viewBox="0 0 76 101" fill="none" aria-hidden="true"><g transform="rotate(-2.5 38 56)"><path d="M10.0 16 Q13.25 8 16.50 16 Q19.75 8 23.00 16 Q26.25 8 29.50 16 Q32.75 8 36.00 16 Q39.25 8 42.50 16 Q45.75 8 49.00 16 Q52.25 8 55.50 16 Q58.75 8 62.00 16 Q64.00 8 66.00 16 L66.0 80.8 Q52 91.8 38 89.8 Q24 87.8 10.0 83.8 Z" fill="var(--card)" stroke="var(--ink)" stroke-width="3.6" stroke-linejoin="round"/><ellipse cx="17" cy="51" rx="4.4" ry="2.7" fill="var(--accent)" opacity=".30"/><ellipse cx="59" cy="51" rx="4.4" ry="2.7" fill="var(--accent)" opacity=".30"/><path d="M22.5 46.0 Q28.0 36.0 33.5 46.0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M42.5 46.0 Q48.0 36.0 53.5 46.0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M31 58 Q38 67 45 58" stroke="var(--ink)" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M22 76 H54" stroke="var(--faint)" stroke-width="2.4" stroke-linecap="round"/><rect x="22" y="83" width="16" height="3.4" rx="1.7" fill="var(--accent)"/></g></svg><figcaption>just copied</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ── features ─────────────────────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <div class="head"><h2>The rest of it.</h2></div>
+    <div class="rows reveal">
+      <div class="row"><h3>Grouped by project</h3><p>Sessions bucket under the repository they
+        happened in, busiest first. Agent worktrees fold back into their parent project instead of
+        appearing as strangers.</p></div>
+      <div class="row"><h3>Any day</h3><p>Step back through the week. A full scan of a 2.7 GB
+        transcript folder takes about a second.</p></div>
+      <div class="row"><h3>Statements <span class="tag">PRO</span></h3><p>Roll a week or a month
+        into one itemised statement, de-duplicated, with a count against work you picked up more
+        than once.</p></div>
+      <div class="row"><h3>A dashboard</h3><p>Files, edits, commands, tokens and the shape of
+        your day by the hour. The numbers live here so the receipt can stay readable.</p></div>
+      <div class="row"><h3>It is also a CLI</h3><p><code>chit --today</code>,
+        <code>--date=…</code>, <code>--from=… --to=…</code>, <code>--markdown</code>. Pipe it
+        straight into whatever eats your timesheets.</p></div>
+      <div class="row"><h3>Out of the way</h3><p>Menu bar only, no Dock icon. ⌥⌃⌘C shows and
+        hides it. Idle cost is nothing measurable.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── pricing ──────────────────────────────────────────────────────── -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="head"><h2>Today is free. Forever.</h2>
+      <p class="lede">Not a trial. The free half is the half you use every morning.</p></div>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Chit</h3>
+        <p class="price">Free</p>
+        <p class="small">and it stays free</p>
+        <ul>
+          <li>Today's receipt, in full</li>
+          <li>Copy the day or any project</li>
+          <li>Plain text and Markdown</li>
+          <li>Hide projects</li>
+          <li>The CLI</li>
+        </ul>
+        <a class="btn ghost buy" data-buy="free" href="#get">Download</a>
+      </div>
+      <div class="tier pro">
+        <h3>Chit Pro</h3>
+        <p class="price">$12</p>
+        <p class="small">once, not a subscription</p>
+        <ul>
+          <li>Everything above</li>
+          <li>Every past day</li>
+          <li>Week and month statements</li>
+          <li>The dashboard</li>
+          <li>A key tied to your Mac, works offline forever</li>
+        </ul>
+        <a class="btn buy" data-buy="pro" href="#get">Unlock Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── get it ───────────────────────────────────────────────────────── -->
+<section id="get">
+  <div class="wrap">
+    <div class="head"><h2>Two ways in.</h2></div>
+    <div class="two">
+      <div>
+        <h3>Download it</h3>
+        <p class="small" style="margin:10px 0 16px">A zip with the app inside. Drag it to
+          Applications. It is not notarised yet, so the first open needs a right click and
+          <b>Open</b>.</p>
+        <a class="btn" href="Chit.zip" id="dl">Chit.zip · <span id="dlsize">385 KB</span></a>
+        <p class="small" style="margin-top:14px" id="zipsha">sha256 f3466fe4c332907c53143c6506b1df3cd3a61c0455026653898a14c08f8dbc33</p>
+      </div>
+      <div>
+        <h3>Or skip the warning</h3>
+        <p class="small" style="margin:10px 0 16px">curl does not quarantine what it fetches, so
+          this installs with no Gatekeeper dialog at all. Same file, same checksum.</p>
+        <code class="line">curl -fsSL https://chit.zopcloud.zop.dev/get.sh | bash</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap fbar">
+    <span>Chit · a Mac app by Ravindra</span>
+    <span class="sp"></span>
+    <a href="#privacy">Privacy</a>
+    <a href="get.sh">get.sh</a>
+    <a href="version.txt">version</a>
+  </div>
+</footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="sheet">
+    <button class="x" id="mx" aria-label="Close">✕</button>
+    <div id="m-free" hidden>
+      <h3>Download Chit</h3>
+      <p>A 385 KB zip. Drag the app to Applications, then right click and Open the first time.</p>
+      <a class="btn" href="Chit.zip">Chit.zip</a>
+    </div>
+    <div id="m-pro" hidden>
+      <h3>Chit Pro, $12 once</h3>
+      <p>Your key is tied to one Mac and works offline forever. Install the free app first,
+         then send me the 8 character code it shows you and I will mint the key.</p>
+      <a class="btn" id="mailbtn" href="#">Email me</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+  // One beacon, no cookies and no identifiers: an event name and the referring
+  // hostname. The counter lives on the Vercel mirror because ZopCloud serves
+  // static files only.
+  (function(){
+    try{
+      fetch("https://chit.vercel.app/api/hit?e=visit&r=" + encodeURIComponent(document.referrer||""),
+            {method:"POST",keepalive:true,mode:"no-cors"});
+    }catch(e){}
+    var dl=document.getElementById("dl");
+    if(dl) dl.addEventListener("click",function(){
+      try{fetch("https://chit.vercel.app/api/hit?e=download",{method:"POST",keepalive:true,mode:"no-cors"});}catch(e){}
+    });
+    document.querySelectorAll('[data-buy="pro"]').forEach(function(b){
+      b.addEventListener("click",function(){
+        try{fetch("https://chit.vercel.app/api/hit?e=pro",{method:"POST",keepalive:true,mode:"no-cors"});}catch(e){}
+      });
+    });
+  })();
+</script>
+</body>
+</html>
