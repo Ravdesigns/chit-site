@@ -59,9 +59,16 @@ present, so **rebuild the app first, copy the zip in, then deploy**:
 ```bash
 cd ~/rav/chit && ./package.sh
 cp dist/Chit.zip ~/rav/sites/chit/Chit.zip
-cd ~/rav/sites/chit && ./deploy.sh      # Vercel mirror
-git add -A && git commit -m "…" && git push   # ZopCloud rebuilds from the push
+cd ~/rav/sites/chit && ./deploy.sh              # Vercel mirror; ALSO rewrites index.html
+git add -A && git commit -m "…" && git push     # must come AFTER deploy.sh
+# then bump SITE_REV in the ZopDay console to force a fresh clone
 ```
+
+**`deploy.sh` must run before the commit, not after.** It injects the sha256 and
+the size into `index.html` from the zip actually present. Commit first and you
+push a page that still says "sha256 pending", ZopCloud builds that, and the
+trust artefact the whole download rests on is simply missing. This happened
+once already.
 
 Deploying in the other order publishes a checksum that does not match the file
 next to it, and a visitor who follows the trust instructions concludes the

@@ -19,7 +19,7 @@ echo "▸ the new build actually shipped"
 PAGE=$(curl -s -m 25 "$H/")
 grep -q 'id="pricing"' <<<"$PAGE" && ok "pricing section present" || no "NO pricing section: still the old commit"
 grep -q 'id="m-pro"'   <<<"$PAGE" && ok "Pro pane present"        || no "no Pro pane"
-grep -q 'class="tag">PRO<' <<<"$PAGE" && ok "Pro tag in the feature grid" || no "no Pro tag"
+grep -q 'class="badge">PRO<' <<<"$PAGE" && ok "Pro badge on the pricing card" || no "no Pro badge"
 grep -q 'You did plenty today' <<<"$PAGE" && ok "hero copy present" || no "hero copy missing"
 [ "$(curl -s -m 20 "$H/version.txt" | tr -d '[:space:]')" = "1.0.0" ] && ok "version.txt 1.0.0" || no "version.txt is $(curl -s -m 20 "$H/version.txt" | tr -d '[:space:]')"
 
