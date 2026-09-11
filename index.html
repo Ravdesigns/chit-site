@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chit: your Claude Code day, printed as a receipt</title>
-<meta name="description" content="Chit reads your local Claude Code history and prints the day back as a receipt, grouped by project and ready to paste. A 385 KB Mac app. No Hammerspoon, no Python, no network.">
+<meta name="description" content="Chit reads your local Claude Code history and prints the day back as a receipt, grouped by project and ready to paste. A 611 KB Mac app. No Hammerspoon, no Python, no network.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='25' font-size='26'>🧾</text></svg>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Chit: your Claude Code day, printed as a receipt">
@@ -45,7 +45,7 @@
         <a class="btn buy" data-buy="free" href="#get">Download for Mac</a>
         <a class="btn ghost" href="#how">See what it prints</a>
       </div>
-      <p class="meta">macOS 13+ · Apple Silicon and Intel · <span id="herosize">385 KB</span> · no account</p>
+      <p class="meta">macOS 13+ · Apple Silicon and Intel · <span id="herosize">611 KB</span> · no account</p>
     </div>
     <div class="shot reveal">
       <img src="assets/receipt.png" alt="The Chit receipt panel showing a day of work grouped by project" width="380">
@@ -57,7 +57,7 @@
 <section id="how">
   <div class="wrap">
     <div class="facts reveal">
-      <div class="fact"><b id="factsize">385 KB</b><span>the whole app</span></div>
+      <div class="fact"><b id="factsize">611 KB</b><span>the whole app</span></div>
       <div class="fact"><b>0</b><span>network calls, ever</span></div>
       <div class="fact"><b>0</b><span>things to install first</span></div>
       <div class="fact"><b>1</b><span>double click</span></div>
@@ -75,18 +75,22 @@
         prompts never appear.</p>
     </div>
     <div class="two">
-      <pre class="paste"><span class="d">Wed, Sep 9 2026</span>
+      <pre class="paste"><span class="d">Fri, Sep 11 2026</span>
 
-<span class="p">rav</span>
-  • Find and push email template to GitHub ticket
-  • flywl-brief.html, leverage-clock.html, reorder.py +1
-  • Create Mac widget for Claude code usage
+<span class="p">api-gateway</span>
+  • Add rate limiting to the public endpoints
+  • errors.go, gateway_test.go, handlers.go +1
+  • Fix the flaky auth integration test
 
-<span class="p">cloud-audit-landing-page</span>
-  • PRODUCT.md, audit.js, index.html +3
+<span class="p">checkout-flow</span>
+  • Debug the failed webhook retry
+  • Summary.tsx, cart.test.tsx, cart.tsx +3
 
-<span class="p">marketing-website-git</span>
-  • Pull marketing-platform repository</pre>
+<span class="p">docs-site</span>
+  • Rewrite the getting-started guide
+
+<span class="p">infra</span>
+  • read backend.tf, iam.tf +5</pre>
       <div>
         <h3>That is the clipboard, not a screenshot.</h3>
         <p class="small" style="margin-top:10px">One click copies the whole day. Another copies a
@@ -206,8 +210,8 @@
         <p class="small" style="margin:10px 0 16px">A zip with the app inside. Drag it to
           Applications. It is not notarised yet, so the first open needs a right click and
           <b>Open</b>.</p>
-        <a class="btn" href="Chit.zip" id="dl">Chit.zip · <span id="dlsize">385 KB</span></a>
-        <p class="small" style="margin-top:14px" id="zipsha">sha256 f3466fe4c332907c53143c6506b1df3cd3a61c0455026653898a14c08f8dbc33</p>
+        <a class="btn" href="Chit.zip" id="dl">Chit.zip · <span id="dlsize">611 KB</span></a>
+        <p class="small" style="margin-top:14px" id="zipsha">sha256 76fb63fcf4e809c0fe4d8e072f0ce16fe0dbbbc5a580adf79ed72a68dbbf9886</p>
       </div>
       <div>
         <h3>Or skip the warning</h3>
@@ -236,7 +240,7 @@
     <button class="x" id="mx" aria-label="Close">✕</button>
     <div id="m-free" hidden>
       <h3>Download Chit</h3>
-      <p>A 385 KB zip. Drag the app to Applications, then right click and Open the first time.</p>
+      <p>A 611 KB zip. Drag the app to Applications, then right click and Open the first time.</p>
       <a class="btn" href="Chit.zip">Chit.zip</a>
     </div>
     <div id="m-pro" hidden>

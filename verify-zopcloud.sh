@@ -38,7 +38,13 @@ if unzip -q "$T/n.zip" -d "$T" 2>/dev/null; then
   [ "$VER" = "1.0.0" ] && ok "bundle is v1.0.0" || no "bundle is v$VER"
   A=$(lipo -archs "$APP/Contents/MacOS/Chit" 2>/dev/null)
   [[ "$A" == *x86_64* && "$A" == *arm64* ]] && ok "universal ($A)" || no "not universal: $A"
-  strings "$APP/Contents/MacOS/Chit" 2>/dev/null | grep -q "chit.licence" && ok "licensing is in the binary" || no "NO licensing in the binary: old build"
+  # Probe CHIT1 (the licence key prefix), not "chit.licence": Swift does not emit
+# that UserDefaults key as one contiguous literal, so the obvious check fails on
+# a binary that is licensed perfectly well.
+strings "$APP/Contents/MacOS/Chit" 2>/dev/null | grep -q "CHIT1" && ok "licensing is in the binary" || no "NO licensing in the binary: old build"
+# Behaviour beats strings: a past day must be refused without a key.
+"$APP/Contents/MacOS/Chit" --date=2020-01-01 >/dev/null 2>&1; [ $? -eq 2 ] && ok "past days are gated" || no "PAST DAYS ARE FREE: Pro is not gated"
+"$APP/Contents/MacOS/Chit" --today >/dev/null 2>&1 && ok "today is free" || no "today is not free"
 else no "zip did not unpack"; fi
 rm -rf "$T"
 
