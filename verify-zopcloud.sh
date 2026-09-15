@@ -48,6 +48,27 @@ strings "$APP/Contents/MacOS/Chit" 2>/dev/null | grep -q "CHIT1" && ok "licensin
 else no "zip did not unpack"; fi
 rm -rf "$T"
 
+echo "▸ the live host is THIS build, not an older one"
+# Every other check in this file tests whether the live host agrees with itself,
+# which a stale deploy does perfectly. This section is the only one that can
+# catch "you forgot to redeploy", and it reported Ready to submit on a site
+# serving a four-commits-old build until it was added.
+LOCALZIP=$(shasum -a 256 "$(dirname "$0")/Chit.zip" | cut -d" " -f1)
+LIVEZIP=$(curl -s -m 90 "$H/Chit.zip" | shasum -a 256 | cut -d" " -f1)
+[ "$LOCALZIP" = "$LIVEZIP" ] && ok "served zip is the one in this repo" \
+  || no "STALE DEPLOY: live zip ${LIVEZIP:0:12} but repo has ${LOCALZIP:0:12}"
+
+LOCALV=$(tr -d "[:space:]" < "$(dirname "$0")/version.txt")
+LIVEV=$(curl -s -m 20 "$H/version.txt" | tr -d "[:space:]")
+[ "$LOCALV" = "$LIVEV" ] && ok "served version.txt matches the repo" \
+  || no "STALE DEPLOY: live version $LIVEV, repo $LOCALV"
+
+# Compare the page itself, ignoring the host rewrite the mirror does.
+LOCALPAGE=$(sed "s|getchit.vercel.app|chit.zopcloud.zop.dev|g" "$(dirname "$0")/index.html" | shasum -a 256 | cut -d" " -f1)
+LIVEPAGE=$(sed "s|getchit.vercel.app|chit.zopcloud.zop.dev|g" <<<"$PAGE" | shasum -a 256 | cut -d" " -f1)
+[ "$LOCALPAGE" = "$LIVEPAGE" ] && ok "served index.html matches the repo" \
+  || no "STALE DEPLOY: the live page is not the page in this repo"
+
 echo "▸ analytics reachable from this host"
 # ZopCloud serves static files only, so /api/hit lives on the Vercel mirror and
 # the page must call it absolutely or the counter silently records nothing.

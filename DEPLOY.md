@@ -78,7 +78,14 @@ download was tampered with.
 
 - [ ] `data-checkout` on `<body>` is empty, so the Pro button opens the email
       sheet. Paste the Gumroad URL in to switch it to real checkout.
-- [ ] Pro is not gated in the app yet: history and statements are free in the
-      current build, so the pricing section describes something that does not
-      exist. Gate it or change the page.
-- [ ] `share.png` (1200×630) is not made yet; the OG tags point at it.
+- [ ] Bump `SITE_REV` in the ZopDay console after every push. ZopDay clones the
+      repo **once**; without the bump the mirror serves the build it first saw,
+      and `verify-zopcloud.sh` will tell you so.
+
+Done, and verified on the shipped artefact (2026-09-15):
+
+- [x] Pro is gated in the app. `Model.step` and `Model.loadStatement` both
+      refuse and raise `proWanted` — the gate is in the model, so the lock on
+      the receipt and the CLI's exit 2 are the same gate, not two decorations.
+- [x] `share.png` exists at 2400x1260 (@2x of the 1200x630 the OG tags claim)
+      and serves 200 from the mirror.
