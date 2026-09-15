@@ -48,6 +48,19 @@ strings "$APP/Contents/MacOS/Chit" 2>/dev/null | grep -q "CHIT1" && ok "licensin
 else no "zip did not unpack"; fi
 rm -rf "$T"
 
+echo "▸ generated assets describe the zip beside them"
+# share.png prints the zip's size, read at render time. Rendered before a repack
+# it advertises the old number on every social preview -- it once said "A 611 KB
+# Mac app" for a 777 KB download. package.sh now renders after zipping; this
+# catches anyone who repacks without it.
+D="$(dirname "$0")"
+for a in share.png assets/receipt.png; do
+  if [ ! -e "$D/$a" ]; then no "$a is missing"
+  elif [ "$D/$a" -ot "$D/Chit.zip" ]; then
+    no "$a is OLDER than Chit.zip -- re-run package.sh, it renders them after zipping"
+  else ok "$a is at least as new as the zip"; fi
+done
+
 echo "▸ the live host is THIS build, not an older one"
 # Every other check in this file tests whether the live host agrees with itself,
 # which a stale deploy does perfectly. This section is the only one that can
