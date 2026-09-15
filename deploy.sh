@@ -24,6 +24,10 @@ s = re.sub(r'(id="zipsha"[^>]*>)[^<]*', lambda m: m.group(1) + "sha256 " + sha, 
 s = re.sub(r'(id="dlsize"[^>]*>)[^<]*', lambda m: m.group(1) + kb + " KB", s)
 s = re.sub(r'(id="herosize"[^>]*>)[^<]*', lambda m: m.group(1) + kb + " KB", s)
 s = re.sub(r'(id="factsize"[^>]*>)[^<]*', lambda m: m.group(1) + kb + " KB", s)
+# Prose too, not just the tagged spans. These two are outside any id and went
+# stale once already, leaving the page quoting two different sizes at once.
+s = re.sub(r'A \d+ KB Mac app', f'A {kb} KB Mac app', s)
+s = re.sub(r'A \d+ KB zip', f'A {kb} KB zip', s)
 path.write_text(s)
 PYEOF
   unzip -p "$ZIP" Chit/Chit.app/Contents/Info.plist \
