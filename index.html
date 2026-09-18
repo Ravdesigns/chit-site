@@ -19,7 +19,11 @@
   /* Page-local only. Everything structural comes from the shared Deskmates
      stylesheet; this is the receipt itself and the two blocks that show its
      output, in the same spirit as the prototype page's .paper block. */
-  .paperwrap{margin:38px auto 0;max-width:430px;position:relative}
+  .paperwrap{margin:38px auto 0;max-width:460px;position:relative}
+  /* 460, not 430: receipt.png is 920px wide, so at a 460px box on a 2x screen it
+     maps 1:1. At 430 the browser resampled 920 -> 860, and a 7% non-integer
+     downscale is exactly what smears 1px dotted rules and thin mono strokes —
+     which is most of what this design is made of. It read as a blurry screenshot. */
   .paperwrap img{width:100%;height:auto;display:block;
     filter:drop-shadow(0 1px 1px oklch(20% .03 62/.16)) drop-shadow(0 26px 60px -26px oklch(20% .03 62/.42))}
   .caption{margin-top:16px;font-size:13px;color:var(--faint);text-align:center}
