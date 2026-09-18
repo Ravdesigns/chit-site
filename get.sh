@@ -39,4 +39,21 @@ if ! open "$DEST/Chit.app" 2>/dev/null; then
   sleep 1
   open "$DEST/Chit.app" 2>/dev/null || "$DEST/Chit.app/Contents/MacOS/Chit" >/dev/null 2>&1 &
 fi
+# The site and the launch copy both advertise `chit --today` as a headline
+# feature, but nothing ever put `chit` on anyone's PATH: a reader who followed
+# that line got "command not found". Link it into the first writable directory
+# already on PATH. Never sudo — /usr/local/bin needs it, and a curl | bash that
+# asks for a password is a good way to teach people a bad habit. Never fatal:
+# the app itself is installed and working by this point.
+BIN=""
+for d in "$HOME/.local/bin" "$HOME/bin" /opt/homebrew/bin; do
+  case ":$PATH:" in *":$d:"*) [ -d "$d" ] && [ -w "$d" ] && BIN="$d" && break ;; esac
+done
+if [ -n "$BIN" ]; then
+  ln -sf "$DEST/Chit.app/Contents/MacOS/Chit" "$BIN/chit" 2>/dev/null \
+    && echo "  cli: chit -> $BIN/chit" || BIN=""
+fi
+[ -z "$BIN" ] && echo "  cli: add it yourself with
+       ln -s \"$DEST/Chit.app/Contents/MacOS/Chit\" /usr/local/bin/chit"
+
 echo "Done 🧾  Installed to $DEST. Look top right, or press ⌥⌃⌘C."

@@ -76,6 +76,14 @@ LIVEV=$(curl -s -m 20 "$H/version.txt" | tr -d "[:space:]")
 [ "$LOCALV" = "$LIVEV" ] && ok "served version.txt matches the repo" \
   || no "STALE DEPLOY: live version $LIVEV, repo $LOCALV"
 
+# get.sh is a deployed file too. The staleness checks covered the zip, the page
+# and version.txt but not the installer, so a get.sh-only change could ship to
+# git, fail to reach the host, and pass every check.
+LOCALGET=$(shasum -a256 "$(dirname "$0")/get.sh" | cut -d" " -f1)
+LIVEGET=$(curl -s -m 30 "$H/get.sh" | shasum -a256 | cut -d" " -f1)
+[ "$LOCALGET" = "$LIVEGET" ] && ok "served get.sh matches the repo" \
+  || no "STALE DEPLOY: the live get.sh is not the one in this repo"
+
 # Compare the page itself, ignoring the host rewrite the mirror does.
 LOCALPAGE=$(sed "s|getchit.vercel.app|chit.zopcloud.zop.dev|g" "$(dirname "$0")/index.html" | shasum -a 256 | cut -d" " -f1)
 LIVEPAGE=$(sed "s|getchit.vercel.app|chit.zopcloud.zop.dev|g" <<<"$PAGE" | shasum -a 256 | cut -d" " -f1)
