@@ -19,6 +19,10 @@
   /* Page-local only. Everything structural comes from the shared Deskmates
      stylesheet; this is the receipt itself and the two blocks that show its
      output, in the same spirit as the prototype page's .paper block. */
+  .badge-ls{display:inline-block;line-height:0;margin-top:30px;
+    transition:transform .22s var(--out),opacity .22s var(--out)}
+  .badge-ls:hover{transform:translateY(-2px)}
+  .badge-ls img{display:block;width:198px;height:62px}
   .paperwrap{margin:38px auto 0;max-width:460px;position:relative}
   /* 460, not 430: receipt.png is 920px wide, so at a 460px box on a 2x screen it
      maps 1:1. At 430 the browser resampled 920 -> 860, and a 7% non-integer
@@ -229,6 +233,17 @@
   </div>
   <code class="line-cmd" style="max-width:560px;margin-left:auto;margin-right:auto">curl -fsSL https://chit.zopcloud.zop.dev/get.sh | bash</code>
   <p class="micro" id="zipsha">sha256 23e46f731cd10531abf11c96f5d826b56187232ae2e9e5862a15d2f3c1e7aa63</p>
+  <!-- Self-hosted rather than hotlinked. The page loads no other third-party
+       asset, so pulling this from launchstag.com would make them the only
+       outside party seeing every visitor — on a site whose whole argument is
+       that nothing leaves your machine. It is also one less thing that can be
+       slow or down during the launch hours. Swap src back to
+       https://launchstag.com/badge-dark.svg if they require a live badge. -->
+  <div style="margin-top:4px">
+    <a class="badge-ls" href="https://launchstag.com/p/chit" target="_blank" rel="noopener">
+      <img src="assets/launchstag.svg" alt="Featured on Launchstag" width="198" height="62" loading="lazy">
+    </a>
+  </div>
 </div></section>
 
 <footer><div class="wrap">
