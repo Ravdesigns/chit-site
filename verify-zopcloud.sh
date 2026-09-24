@@ -8,7 +8,7 @@ ok(){ printf "  \033[32m✓\033[0m %s\n" "$1"; pass=$((pass+1)); }
 no(){ printf "  \033[31m✗\033[0m %s\n" "$1"; fail=$((fail+1)); }
 
 echo "▸ pages and assets"
-for p in / /assets/site.css /assets/site.js /get.sh /version.txt /share.png /robots.txt /Chit.zip; do
+for p in / /assets/site.css /assets/site.js /assets/launchstag.svg /get.sh /version.txt /share.png /robots.txt /Chit.zip; do
   c=$(curl -s -o /dev/null -m 20 -w '%{http_code}' "$H$p")
   [ "$c" = "200" ] && ok "$p" || no "$p returned $c"
 done
