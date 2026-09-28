@@ -19,6 +19,12 @@
   /* Page-local only. Everything structural comes from the shared Deskmates
      stylesheet; this is the receipt itself and the two blocks that show its
      output, in the same spirit as the prototype page's .paper block. */
+  .phrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+    gap:20px;margin-top:32px}
+  .ph{display:inline-block;line-height:0;
+    transition:transform .22s var(--out),opacity .22s var(--out)}
+  .ph:hover{transform:translateY(-2px)}
+  .ph img{display:block;width:250px;height:54px}
   .badge-ls{display:inline-block;line-height:0;margin-top:30px;
     transition:transform .22s var(--out),opacity .22s var(--out)}
   .badge-ls:hover{transform:translateY(-2px)}
@@ -99,6 +105,18 @@
     <a href="#how" class="btn text">How it works →</a>
   </div>
   <div class="micro">macOS 13+ · Apple Silicon and Intel · <span id="herosize">777 KB</span> · free · reads only your local history</div>
+  <div class="phrow">
+    <!-- #3 Product of the Day, 26 Sep 2026. Self-hosted for the same reason as the
+         Launchstag badge: this page loads no third-party asset. Nothing is lost —
+         the day is over and the rank is final, so a live copy could never show
+         anything different. PH's live URL, if ever wanted:
+         https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=1254383&theme=light&period=daily -->
+    <a class="ph" href="https://www.producthunt.com/products/chit-2?embed=true&amp;utm_source=badge-top-post-badge&amp;utm_medium=badge&amp;utm_campaign=badge-chit-2"
+       target="_blank" rel="noopener noreferrer">
+      <img src="assets/ph-top-post.svg" width="250" height="54"
+           alt="Chit — #3 Product of the Day on Product Hunt">
+    </a>
+  </div>
 </div></header>
 
 <section><div class="wrap">
