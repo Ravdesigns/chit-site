@@ -21,7 +21,8 @@ grep -q 'id="pricing"' <<<"$PAGE" && ok "pricing section present" || no "NO pric
 grep -q 'id="m-pro"'   <<<"$PAGE" && ok "Pro pane present"        || no "no Pro pane"
 grep -q 'class="badge">PRO<' <<<"$PAGE" && ok "Pro badge on the pricing card" || no "no Pro badge"
 grep -q 'You did plenty today' <<<"$PAGE" && ok "hero copy present" || no "hero copy missing"
-[ "$(curl -s -m 20 "$H/version.txt" | tr -d '[:space:]')" = "1.0.0" ] && ok "version.txt 1.0.0" || no "version.txt is $(curl -s -m 20 "$H/version.txt" | tr -d '[:space:]')"
+WANTV=$(tr -d '[:space:]' < "$(dirname "$0")/version.txt")   # from the repo: a hardcoded 1.0.0 failed the 1.0.1 deploy
+[ "$(curl -s -m 20 "$H/version.txt" | tr -d '[:space:]')" = "$WANTV" ] && ok "version.txt $WANTV" || no "version.txt is $(curl -s -m 20 "$H/version.txt" | tr -d '[:space:]')"
 
 echo "▸ the trust artefact"
 SHOWN=$(grep -o 'sha256 [a-f0-9]\{64\}' <<<"$PAGE" | head -1 | cut -d' ' -f2)
@@ -35,7 +36,7 @@ T=$(mktemp -d); curl -fsSL -m 60 "$H/Chit.zip" -o "$T/n.zip" 2>/dev/null
 if unzip -q "$T/n.zip" -d "$T" 2>/dev/null; then
   APP="$T/Chit/Chit.app"
   VER=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist" 2>/dev/null)
-  [ "$VER" = "1.0.0" ] && ok "bundle is v1.0.0" || no "bundle is v$VER"
+  [ "$VER" = "$WANTV" ] && ok "bundle is v$WANTV" || no "bundle is v$VER, want v$WANTV"
   A=$(lipo -archs "$APP/Contents/MacOS/Chit" 2>/dev/null)
   [[ "$A" == *x86_64* && "$A" == *arm64* ]] && ok "universal ($A)" || no "not universal: $A"
   # Probe CHIT1 (the licence key prefix), not "chit.licence": Swift does not emit
